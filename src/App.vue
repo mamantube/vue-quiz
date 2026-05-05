@@ -22,13 +22,6 @@ console.log(quizes)
         <input v-model.trim="search" type="text" id="search-input">
       </header>
       <section id="quiz-container">
-        <!-- <div v-for="quiz in quizes" :key="quiz.id" class="card">
-          <img :src="quiz.img" :alt="quiz.title">
-          <div class="card-body">
-            <h2> {{ quiz.title }}</h2>
-            <p> {{ quiz.questions.length }} Questions</p>
-          </div>
-        </div> -->
         <QuizCard v-for="quiz in quizes" :key="quiz.id" :quiz="quiz" />
       </section>
     </main>
