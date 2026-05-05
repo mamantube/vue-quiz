@@ -1,15 +1,31 @@
+<script setup>
+import { ref, watch } from "vue";
+import srcQuiz from "./data/quizes.json";
+
+const quizes = ref(srcQuiz);
+const search = ref("");
+
+watch(search, () => {
+  quizes.value = srcQuiz.filter((quiz) => {
+    return quiz.title.toLowerCase().includes(search.value.toLowerCase());
+  })
+})
+
+console.log(quizes)
+</script>
+
 <template>
     <main>
       <header>
         <h1 id="title">Quiz</h1>
-        <input type="text" id="search-input">
+        <input v-model.trim="search" type="text" id="search-input">
       </header>
       <section id="quiz-container">
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHByb2dyYW1taW5nfGVufDB8fDB8fHww" alt="">
+        <div v-for="quiz in quizes" :key="quiz.id" class="card">
+          <img :src="quiz.img" :alt="quiz.title">
           <div class="card-body">
-            <h2>Programming</h2>
-            <p>2 Questions</p>
+            <h2> {{ quiz.title }}</h2>
+            <p> {{ quiz.questions.length }} Questions</p>
           </div>
         </div>
       </section>
