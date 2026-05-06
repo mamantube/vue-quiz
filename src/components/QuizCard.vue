@@ -1,9 +1,17 @@
 <script setup>
+import { useRouter } from 'vue-router';
 const { quiz } = defineProps(["quiz"])
+
+const router = useRouter();
+
+function goTo() {
+  router.push({ name: "quiz", params: { id: quiz.id }})
+}
+
 </script>
 
 <template>
-    <div class="card">
+    <div class="card" @click="goTo">
         <img :src="quiz.img" :alt="quiz.title">
         <div class="card-body">
             <h2> {{ quiz.title }}</h2>
